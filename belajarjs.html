@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+    <title>belajar js</title>
+    <link rel="stylesheet" href="belajar.css" type="text/css" >
+    <body>
+
+        <div class="box1">
+
+            <div id="badankuis">
+            
+                <div id="pertanyaankuis">
+
+                    <p id="TO"></p> <br>
+    
+                </div>
+    
+                <div id="pilihanganda">
+    
+                    <input type="radio" name="pilihan" data-id="0" id="pilihanA">
+                    <Label for="pilihanA" id="pilihantextA"></Label> <br>
+            
+                    <input type="radio" name="pilihan" data-id="1" id="pilihanB">
+                    <Label for="pilihanB" id="pilihantextB"></Label> <br>
+            
+                    <input type="radio" name="pilihan" data-id="2" id="pilihanC">
+                    <Label for="pilihanC" id="pilihantextC"></Label> <br>  
+                    
+                    <input type="radio" name="pilihan" data-id="3" id="pilihanD">
+                    <Label for="pilihanD" id="pilihantextD"></Label> <br>  
+                    
+                    <input type="radio" name="pilihan" data-id="4" id="pilihanE">
+                    <Label for="pilihanE" id="pilihantextE"></Label> <br>
+    
+                </div> <br>
+                <div id="tombol1">
+                    <button onclick="nextpertanyaan()">Next</button>
+                </div>    
+            
+            </div>
+            
+        </div>
+
+        <div class="box2"></div>
+
+        
+        
+      
+        
+
+    </body>
+
+    <script>
+
+    const TO1=[
+    {
+    pertanyaan : "Prestasi Intan lebih tinggi dari Dini dan lebih rendah dari Tina. Prestasi Cantik lebih lebih rendah dari Intan, tetapi lebih tinggi dari Dini. Prestasi Dani lebih tinggi dari Dini dan Cantik. Tiga orang berprestasi terbaik adalah …",
+    answers : ['Melaporkan keadaan nenek kepada panitia pemungutan suara', 'Melaporkan keadaan nenek kepada panitia pemungutan suara', 'Melaporkan keadaan nenek kepada panitia pemungutan suara Melaporkan keadaan nenek kepada panitia pemungutan suara Melaporkan keadaan nenek kepada panitia pemungutan suara Melaporkan keadaan nenek kepada panitia pemungutan suaraMelaporkan keadaan nenek kepada panitia pemungutan suara Melaporkan keadaan nenek kepada panitia pemungutan suara', '4 buah', '5 buah'] 
+    },
+    
+    {
+    pertanyaan : "berapa banyak buah ?",
+    answers : ['1 buah', '2 buah', '3 buah', '4 buah', '5 buah']
+    },
+
+    {
+    pertanyaan : "berapa banyak Pohon ?",
+    answers : ['1 buah', '2 buah', '3 buah', '4 buah', '5 buah'] 
+    },
+
+    {
+    pertanyaan : "berapa banyak telinga ?",
+    answers : ['1 buah', '2 buah', '3 buah', '4 buah', '5 buah'] 
+    },
+
+    {
+    pertanyaan : "berapa banyak jari tangan ?",
+    answers : ['1 buah', '2 buah', '3 buah', '4 buah', '5 buah'] 
+    },
+
+    {
+    pertanyaan : "berapa banyak orang ?",
+    answers : ['1 buah', '2 buah', '3 buah', '4 buah', '5 buah'] 
+    },
+
+    {
+    pertanyaan : "berapa banyak planet ?",
+    answers : ['1 buah', '2 buah', '3 buah', '4 buah', '5 buah'] 
+    },
+
+    {
+    pertanyaan : "berapa banyak rambut ?",
+    answers : ['1 buah', '2 buah', '3 buah', '4 buah', '5 buah'] 
+    },
+
+    ]
+
+    const CORRECT_ANSWER = [1, 1, 1, 1, 1, 1, 1, 1]
+
+    
+    //--Setting pertanyaan
+
+
+    document.addEventListener("DOMContentLoaded", function(event) {
+        setupQuestion()
+    })
+
+    let current_p = 0
+    let saved_answer = []
+    let total_score = 0
+
+    function setupQuestion() {
+
+    document.getElementById('TO').innerHTML = TO1[current_p]["pertanyaan"]
+    document.getElementById('pilihantextA').innerHTML = TO1[current_p]["answers"][0]
+    document.getElementById('pilihantextB').innerHTML = TO1[current_p]["answers"][1]
+    document.getElementById('pilihantextC').innerHTML = TO1[current_p]["answers"][2]
+    document.getElementById('pilihantextD').innerHTML = TO1[current_p]["answers"][3]
+    document.getElementById('pilihantextE').innerHTML = TO1[current_p]["answers"][4]
+
+    }
+
+    
+    function nextpertanyaan() {
+        current_p++
+        saveAnswer()
+        if(current_p > TO1.length - 1)
+        
+        stopQuiz()
+        resetState()
+            
+        setupQuestion()
+        
+    }
+
+
+    function resetState() {
+        document.querySelector('input[name="pilihan"]:checked').checked = false
+    }
+
+    function stopQuiz() {
+        checkScore()
+        alert('selesai! score: ' + total_score)
+        return
+    }
+
+    function saveAnswer() {
+        const answer = document.querySelector('input[name="pilihan"]:checked')
+        if (answer != null) {
+            saved_answer.push(parseInt(answer.getAttribute('data-id')))
+            console.log(saved_answer)
+        } else{
+            saved_answer.push(0)
+        }
+    }
+
+
+    function checkScore() {
+        for (i = 0; i < saved_answer.length; i++) {
+            if (saved_answer[i] == CORRECT_ANSWER[i])
+                total_score += 5 
+        }
+    }
+
+    </script>
+</html>
